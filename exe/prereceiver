@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+require 'smart_machine'
+
+if ARGV[0] == 'prereceive'
+	raise "Please provide appname, username, oldrev, newrev and refname" unless ARGV[1] && ARGV[2] && ARGV[3] && ARGV[4] && ARGV[5]
+	SmartMachine::Grids::Prereceiver.prereceive(ARGV[1], ARGV[2], ARGV[3], ARGV[4], ARGV[5])
+end

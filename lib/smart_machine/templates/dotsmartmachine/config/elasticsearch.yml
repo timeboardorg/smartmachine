@@ -1,0 +1,5 @@
+elasticsearchone:
+  port: 9200
+
+# elasticsearchtwo:
+#   port: 9201

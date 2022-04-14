@@ -1,0 +1,33 @@
+#!/usr/bin/env ruby
+
+require "smart_machine"
+
+command = ARGV.shift
+
+machine = SmartMachine::Machine.new
+
+case command
+when "grids"
+	grids = SmartMachine::Grids.new
+	grids.run ARGV
+
+when "apps"
+	grids = SmartMachine::Apps.new
+	grids.run ARGV
+
+when "buildpacker"
+	action = ARGV.shift
+	buildpacker = SmartMachine::Buildpacker.new
+	buildpacker.public_send(action, *ARGV)
+
+when "prereceiver"
+	action = ARGV.shift
+	prereceiver = SmartMachine::Grids::Prereceiver.new
+	prereceiver.public_send(action, *ARGV)
+
+when "scheduler"
+	action = ARGV.shift
+	scheduler = SmartMachine::Grids::Scheduler.new
+	scheduler.public_send(action, *ARGV)
+
+end

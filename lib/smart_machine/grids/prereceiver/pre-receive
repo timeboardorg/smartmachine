@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# oldrev, newrev, refname are a feature of the way in which Git executes the pre-receive hook.
+# See https://www.kernel.org/pub/software/scm/git/docs/githooks.html
+while read oldrev newrev refname; do
+    if [ $(git rev-parse --is-bare-repository) = true ]; then
+	REPOSITORY_BASENAME=$(basename "$PWD")
+	REPOSITORY_BASENAME=${REPOSITORY_BASENAME%.git}
+    else
+	REPOSITORY_BASENAME=$(basename $(readlink -nf "$PWD"/..))
+    fi
+    script --quiet --return --flush --command "smartmachine grid prereceiver prereceive $REPOSITORY_BASENAME $REMOTE_USER $oldrev $newrev $refname" /home/$(whoami)/machine/apps/containers/$REPOSITORY_BASENAME/typescript
+    if [ "$?" -eq 10 ]; then
+	exit 0
+    fi
+    exit 1
+done

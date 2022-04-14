@@ -1,0 +1,4 @@
+# The username and password will be used by nginx to provide htpasswd based authentication for each of the domains specified.
+
+git.yourdomain.com:
+  yourname@yourdomain.com: yourpassword

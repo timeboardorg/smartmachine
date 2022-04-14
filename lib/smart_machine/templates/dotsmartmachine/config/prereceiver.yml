@@ -1,0 +1,7 @@
+prereceiverone:
+  git_domain: "git.yourdomain.com"
+  letsencrypt_test: false
+
+# prereceivertwo:
+#   git_domain: "gittwo.yourdomain.com"
+#   letsencrypt_test: false

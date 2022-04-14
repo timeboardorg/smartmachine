@@ -1,0 +1,13 @@
+minioone:
+  host: "yourminioone.yourdomain.com"
+  access_key: <%= SmartMachine.credentials.dig(:minioone, :access_key) %>
+  secret_key: <%= SmartMachine.credentials.dig(:minioone, :secret_key) %>
+  browser: on
+  worm: off
+
+# miniotwo:
+#   host: "yourminiotwo.yourdomain.com"
+#   access_key: <%= SmartMachine.credentials.dig(:miniotwo, :access_key) %>
+#   secret_key: <%= SmartMachine.credentials.dig(:miniotwo, :secret_key) %>
+#   browser: on
+#   worm: off

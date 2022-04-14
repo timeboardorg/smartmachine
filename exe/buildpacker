@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+require 'smart_machine'
+
+if ARGV[0] == 'pack'
+	buildpacker = SmartMachine::Buildpacker.new
+	buildpacker.pack
+end

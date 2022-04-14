@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+
+require 'smart_machine'
+
+command = ARGV.shift
+
+scheduler = SmartMachine::Grids::Scheduler.new
+
+case command
+when "start"
+	action = ARGV.shift
+	scheduler.mysql("start") if action == "--mysql"
+
+when "stop"
+	action = ARGV.shift
+	scheduler.mysql("stop") if action == "--mysql"
+
+end

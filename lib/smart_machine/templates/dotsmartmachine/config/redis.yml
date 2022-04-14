@@ -1,0 +1,13 @@
+redisone:
+  port: 6379
+  password: <%= SmartMachine.credentials.dig(:redisone, :password) %>
+  appendonly: "yes"
+  maxmemory: 250MB
+  maxmemory_policy: allkeys-lfu
+
+# redistwo:
+#   port: 6380
+#   password: <%= SmartMachine.credentials.dig(:redistwo, :password) %>
+#   appendonly: "yes"
+#   maxmemory: 250MB
+#   maxmemory_policy: allkeys-lfu

@@ -1,0 +1,49 @@
+# Contributor: Eivind Uggedal <eu@eju.no>
+# Maintainer: Natanael Copa <ncopa@alpinelinux.org>
+pkgname=fcgiwrap
+#pkgver=1.1.0
+pkgver=1.1.1
+#pkgrel=3
+pkgrel=4
+pkgdesc="Simple server for running CGI applications over FastCGI"
+# This url has been changed to add no_buffering feature for fcgiwrap where has not been currently merged by gnosek
+#url="https://github.com/gnosek/fcgiwrap"
+url="https://github.com/notr1ch/fcgiwrap"
+arch="all"
+license="MIT"
+pkgusers="fcgiwrap"
+pkggroups="www-data"
+install="$pkgname.pre-install"
+makedepends="$depends_dev autoconf libtool automake fcgi-dev"
+subpackages="$pkgname-doc $pkgname-openrc"
+# This source has been changed to add no_buffering feature for fcgiwrap where has not been currently merged by gnosek. Please note the use of master branch instead of $pkgver.
+#source="$pkgname-$pkgver.tar.gz::https://github.com/gnosek/$pkgname/archive/$pkgver.tar.gz
+source="$pkgname-$pkgver.tar.gz::https://github.com/notr1ch/$pkgname/archive/master.tar.gz
+	$pkgname.initd
+	$pkgname.confd"
+
+#builddir="$srcdir/$pkgname-$pkgver"
+builddir="$srcdir/$pkgname-master"
+
+build() {
+	cd "$builddir"
+	autoreconf --install
+	CFLAGS="$CFLAGS -Wno-implicit-fallthrough" \
+	./configure --prefix=/usr \
+		--mandir=/share/man \
+		--sbindir=/bin
+	make
+}
+
+package() {
+	cd "$builddir"
+	install -d -m2775 -o fcgiwrap -g www-data  "$pkgdir"/run/fcgiwrap
+	make DESTDIR="$pkgdir" install
+	install -Dm755 $srcdir/$pkgname.initd "$pkgdir"/etc/init.d/$pkgname
+	install -Dm644 $srcdir/$pkgname.confd "$pkgdir"/etc/conf.d/$pkgname
+}
+
+
+sha512sums="4ffacd247f48ff0827531da1e9fbf19262d51827668d90cde1ec30ea23139cdf6f45a3b2a955a2a3b8e9ddbc85e7e4fa4dd18217e71288441c8cabdff5c24846  fcgiwrap-1.1.1.tar.gz
+0dbf5f4387e5dc5de6e9bd6d98247e175f1a7943fe1d04ea916881b1269fd0b62abfafac91f8c0dd2f4dc9c71118195ba9dd7cf9bb5e3d93e6e711ec7d770453  fcgiwrap.initd
+893e9afa92c20c9d0dab68fffc806a1be1f2e28a7e73bbb497316386a9ee083be4bad68a90f660e489311a9812a512b50fb0edb8b9c49b12f6cd266ba53b01a6  fcgiwrap.confd"
