@@ -1,7 +1,7 @@
 ARG SMARTMACHINE_VERSION
 
 FROM smartmachine/smartengine:$SMARTMACHINE_VERSION
-LABEL maintainer="Timeboard <support@timeboard.me>"
+LABEL maintainer="Gaurav Goel <gaurav@timeboard.me>"
 
 # Ruby on Rails Essentials
 RUN apk add --update build-base && \

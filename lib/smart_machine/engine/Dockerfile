@@ -1,5 +1,5 @@
 FROM ruby:2.7.0-alpine3.11
-LABEL maintainer="Timeboard <support@timeboard.me>"
+LABEL maintainer="Gaurav Goel <gaurav@timeboard.me>"
 
 # User
 # --- Fix to change docker gid to 998 (if it is in use) so that addgroup is free to create a group with docker gid.

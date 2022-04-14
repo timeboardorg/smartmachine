@@ -1,7 +1,7 @@
 ARG SMARTMACHINE_VERSION
 
 FROM smartmachine/smartengine:$SMARTMACHINE_VERSION
-LABEL maintainer="Timeboard <support@timeboard.me>"
+LABEL maintainer="Gaurav Goel <gaurav@timeboard.me>"
 
 # FCGI Essentials
 # --- IMPORTANT NOTE: This is custom built fcgiwrap package for alpine linux to account for NO_BUFFERING option.
