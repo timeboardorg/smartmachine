@@ -37,7 +37,7 @@ module SmartMachine
           "--volume='#{@home_dir}/smartmachine/grids/redis/#{@name}/data:/data'",
           "--restart='always'",
           "--network='#{@name}-network'",
-          "redis:6.2.6-alpine3.15 redis-server --port #{@port} --requirepass #{@password} --appendonly #{@appendonly} --maxmemory #{@maxmemory} --maxmemory-policy #{@maxmemory_policy}"
+          "redislabs/redismod:latest redis-server --port #{@port} --requirepass #{@password} --appendonly #{@appendonly} --maxmemory #{@maxmemory} --maxmemory-policy #{@maxmemory_policy}"
         ]
         if system(command.compact.join(" "), out: File::NULL)
           puts "done"
