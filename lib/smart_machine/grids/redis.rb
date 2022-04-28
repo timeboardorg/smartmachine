@@ -33,7 +33,7 @@ module SmartMachine
           "docker create",
           "--name='#{@name}'",
           "--user `id -u`:`id -g`",
-          "--publish='#{@port}:#{@port}'",
+          "--publish='#{@port}:6379'",
           "--volume='#{@home_dir}/smartmachine/grids/redis/#{@name}/data:/data'",
           "--restart='always'",
           "--network='#{@name}-network'",
