@@ -10,6 +10,8 @@ module SmartMachine
         @appendonly = config.dig(:appendonly)
         @maxmemory = config.dig(:maxmemory)
         @maxmemory_policy = config.dig(:maxmemory_policy)
+        @modules = config.dig(:modules)&.map { |module_name| "--loadmodule /usr/lib/redis/modules/#{module_name}.so" } || []
+        @modules.push("Plugin /var/opt/redislabs/modules/rg/plugin/gears_python.so")
 
         @name = name.to_s
         @home_dir = File.expand_path('~')
@@ -37,7 +39,7 @@ module SmartMachine
           "--volume='#{@home_dir}/smartmachine/grids/redis/#{@name}/data:/data'",
           "--restart='always'",
           "--network='#{@name}-network'",
-          "redislabs/redismod:latest redis-server --port #{@port} --requirepass #{@password} --appendonly #{@appendonly} --maxmemory #{@maxmemory} --maxmemory-policy #{@maxmemory_policy}"
+          "redislabs/redismod:latest --port #{@port} --requirepass #{@password} --appendonly #{@appendonly} --maxmemory #{@maxmemory} --maxmemory-policy #{@maxmemory_policy} #{@modules.join(' ')}"
         ]
         if system(command.compact.join(" "), out: File::NULL)
           puts "done"

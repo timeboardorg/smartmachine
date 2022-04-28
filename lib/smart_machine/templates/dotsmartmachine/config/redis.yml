@@ -4,6 +4,7 @@ redisone:
   appendonly: "yes"
   maxmemory: 250MB
   maxmemory_policy: allkeys-lfu
+  modules: []
 
 # redistwo:
 #   port: 6380
@@ -11,3 +12,4 @@ redisone:
 #   appendonly: "yes"
 #   maxmemory: 250MB
 #   maxmemory_policy: allkeys-lfu
+#   modules: []
